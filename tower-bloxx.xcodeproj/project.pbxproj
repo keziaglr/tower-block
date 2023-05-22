@@ -7,16 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC2B00DF2A1B092700C135D3 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2B00DE2A1B092700C135D3 /* Block.swift */; };
+		AC416A682A1B961700240610 /* Jua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC416A672A1B961700240610 /* Jua-Regular.ttf */; };
+		AC416A6D2A1B966D00240610 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC416A6C2A1B966D00240610 /* AppColor.swift */; };
+		AC416A6F2A1B974100240610 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC416A6E2A1B974100240610 /* AppFont.swift */; };
 		AC4B16DB2A1609A0002667E3 /* tower_bloxxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B16DA2A1609A0002667E3 /* tower_bloxxApp.swift */; };
-		AC4B16DD2A1609A0002667E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B16DC2A1609A0002667E3 /* ContentView.swift */; };
+		AC4B16DD2A1609A0002667E3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B16DC2A1609A0002667E3 /* GameView.swift */; };
 		AC4B16DF2A1609A1002667E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4B16DE2A1609A1002667E3 /* Assets.xcassets */; };
 		AC4B16E22A1609A1002667E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4B16E12A1609A1002667E3 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC2B00DE2A1B092700C135D3 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		AC416A672A1B961700240610 /* Jua-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jua-Regular.ttf"; sourceTree = "<group>"; };
+		AC416A6C2A1B966D00240610 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		AC416A6E2A1B974100240610 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		AC416A702A1B97D900240610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AC4B16D72A1609A0002667E3 /* tower-bloxx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tower-bloxx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4B16DA2A1609A0002667E3 /* tower_bloxxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tower_bloxxApp.swift; sourceTree = "<group>"; };
-		AC4B16DC2A1609A0002667E3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC4B16DC2A1609A0002667E3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		AC4B16DE2A1609A1002667E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC4B16E12A1609A1002667E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +41,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC416A632A1B95C100240610 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B16DA2A1609A0002667E3 /* tower_bloxxApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		AC416A642A1B95E100240610 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				AC416A692A1B963E00240610 /* Themes */,
+				AC416A662A1B960500240610 /* Font */,
+				AC416A652A1B95F000240610 /* Resources */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AC416A652A1B95F000240610 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B16DE2A1609A1002667E3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC416A662A1B960500240610 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AC416A672A1B961700240610 /* Jua-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		AC416A692A1B963E00240610 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				AC416A6B2A1B964E00240610 /* Font */,
+				AC416A6A2A1B964600240610 /* Colors */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		AC416A6A2A1B964600240610 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				AC416A6C2A1B966D00240610 /* AppColor.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		AC416A6B2A1B964E00240610 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AC416A6E2A1B974100240610 /* AppFont.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		AC4B16CE2A1609A0002667E3 = {
 			isa = PBXGroup;
 			children = (
@@ -51,10 +119,12 @@
 		AC4B16D92A1609A0002667E3 /* tower-bloxx */ = {
 			isa = PBXGroup;
 			children = (
-				AC4B16DA2A1609A0002667E3 /* tower_bloxxApp.swift */,
-				AC4B16DC2A1609A0002667E3 /* ContentView.swift */,
-				AC4B16DE2A1609A1002667E3 /* Assets.xcassets */,
+				AC416A702A1B97D900240610 /* Info.plist */,
+				AC416A642A1B95E100240610 /* Core */,
+				AC416A632A1B95C100240610 /* Application */,
+				AC4B16DC2A1609A0002667E3 /* GameView.swift */,
 				AC4B16E02A1609A1002667E3 /* Preview Content */,
+				AC2B00DE2A1B092700C135D3 /* Block.swift */,
 			);
 			path = "tower-bloxx";
 			sourceTree = "<group>";
@@ -125,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC416A682A1B961700240610 /* Jua-Regular.ttf in Resources */,
 				AC4B16E22A1609A1002667E3 /* Preview Assets.xcassets in Resources */,
 				AC4B16DF2A1609A1002667E3 /* Assets.xcassets in Resources */,
 			);
@@ -137,7 +208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC4B16DD2A1609A0002667E3 /* ContentView.swift in Sources */,
+				AC2B00DF2A1B092700C135D3 /* Block.swift in Sources */,
+				AC416A6F2A1B974100240610 /* AppFont.swift in Sources */,
+				AC416A6D2A1B966D00240610 /* AppColor.swift in Sources */,
+				AC4B16DD2A1609A0002667E3 /* GameView.swift in Sources */,
 				AC4B16DB2A1609A0002667E3 /* tower_bloxxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,13 +341,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tower-bloxx/Preview Content\"";
+				DEVELOPMENT_TEAM = CL2T9LDG63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tower-bloxx/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,13 +371,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tower-bloxx/Preview Content\"";
+				DEVELOPMENT_TEAM = CL2T9LDG63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "tower-bloxx/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

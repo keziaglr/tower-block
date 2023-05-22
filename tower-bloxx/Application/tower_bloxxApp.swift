@@ -11,7 +11,7 @@ import SwiftUI
 struct tower_bloxxApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GameView()
         }
     }
 }
