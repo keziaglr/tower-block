@@ -15,6 +15,13 @@
 		AC4B16DD2A1609A0002667E3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B16DC2A1609A0002667E3 /* GameView.swift */; };
 		AC4B16DF2A1609A1002667E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4B16DE2A1609A1002667E3 /* Assets.xcassets */; };
 		AC4B16E22A1609A1002667E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4B16E12A1609A1002667E3 /* Preview Assets.xcassets */; };
+		ACC25AC72A1D212200043E23 /* MusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC25AC62A1D212200043E23 /* MusicController.swift */; };
+		ACD2DC322A1C708700A1ADBF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD2DC312A1C708700A1ADBF /* HomeView.swift */; };
+		ACD2DC362A1C7BC400A1ADBF /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD2DC352A1C7BC400A1ADBF /* CustomButton.swift */; };
+		ACD2DC382A1C81A000A1ADBF /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD2DC372A1C81A000A1ADBF /* Popup.swift */; };
+		ACD2DC3D2A1CCD3600A1ADBF /* TowerBlock.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACD2DC3B2A1CCD3600A1ADBF /* TowerBlock.xcdatamodeld */; };
+		ACD2DC3F2A1CCDBA00A1ADBF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD2DC3E2A1CCDBA00A1ADBF /* CoreDataManager.swift */; };
+		ACD2DC432A1D024100A1ADBF /* bgm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ACD2DC422A1D024100A1ADBF /* bgm.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		AC4B16DC2A1609A0002667E3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		AC4B16DE2A1609A1002667E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC4B16E12A1609A1002667E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ACC25AC62A1D212200043E23 /* MusicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicController.swift; sourceTree = "<group>"; };
+		ACD2DC312A1C708700A1ADBF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		ACD2DC352A1C7BC400A1ADBF /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		ACD2DC372A1C81A000A1ADBF /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
+		ACD2DC3C2A1CCD3600A1ADBF /* TowerBlock.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TowerBlock.xcdatamodel; sourceTree = "<group>"; };
+		ACD2DC3E2A1CCDBA00A1ADBF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		ACD2DC422A1D024100A1ADBF /* bgm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +66,7 @@
 		AC416A642A1B95E100240610 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ACD2DC392A1CCD1400A1ADBF /* Utilities */,
 				AC416A692A1B963E00240610 /* Themes */,
 				AC416A662A1B960500240610 /* Font */,
 				AC416A652A1B95F000240610 /* Resources */,
@@ -62,6 +77,7 @@
 		AC416A652A1B95F000240610 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ACD2DC412A1D023800A1ADBF /* Music */,
 				AC4B16DE2A1609A1002667E3 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -78,6 +94,7 @@
 		AC416A692A1B963E00240610 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				ACD2DC332A1C7BAE00A1ADBF /* Presenters */,
 				AC416A6B2A1B964E00240610 /* Font */,
 				AC416A6A2A1B964600240610 /* Colors */,
 			);
@@ -119,10 +136,10 @@
 		AC4B16D92A1609A0002667E3 /* tower-bloxx */ = {
 			isa = PBXGroup;
 			children = (
+				ACD2DC302A1C613800A1ADBF /* Features */,
 				AC416A702A1B97D900240610 /* Info.plist */,
 				AC416A642A1B95E100240610 /* Core */,
 				AC416A632A1B95C100240610 /* Application */,
-				AC4B16DC2A1609A0002667E3 /* GameView.swift */,
 				AC4B16E02A1609A1002667E3 /* Preview Content */,
 				AC2B00DE2A1B092700C135D3 /* Block.swift */,
 			);
@@ -135,6 +152,58 @@
 				AC4B16E12A1609A1002667E3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ACD2DC302A1C613800A1ADBF /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AC4B16DC2A1609A0002667E3 /* GameView.swift */,
+				ACD2DC312A1C708700A1ADBF /* HomeView.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		ACD2DC332A1C7BAE00A1ADBF /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				ACD2DC342A1C7BB600A1ADBF /* Components */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		ACD2DC342A1C7BB600A1ADBF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ACD2DC352A1C7BC400A1ADBF /* CustomButton.swift */,
+				ACD2DC372A1C81A000A1ADBF /* Popup.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		ACD2DC392A1CCD1400A1ADBF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				ACD2DC3A2A1CCD1B00A1ADBF /* CoreData */,
+				ACC25AC62A1D212200043E23 /* MusicController.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		ACD2DC3A2A1CCD1B00A1ADBF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				ACD2DC3B2A1CCD3600A1ADBF /* TowerBlock.xcdatamodeld */,
+				ACD2DC3E2A1CCDBA00A1ADBF /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		ACD2DC412A1D023800A1ADBF /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				ACD2DC422A1D024100A1ADBF /* bgm.mp3 */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +266,7 @@
 			files = (
 				AC416A682A1B961700240610 /* Jua-Regular.ttf in Resources */,
 				AC4B16E22A1609A1002667E3 /* Preview Assets.xcassets in Resources */,
+				ACD2DC432A1D024100A1ADBF /* bgm.mp3 in Resources */,
 				AC4B16DF2A1609A1002667E3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,11 +278,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD2DC3D2A1CCD3600A1ADBF /* TowerBlock.xcdatamodeld in Sources */,
+				ACD2DC382A1C81A000A1ADBF /* Popup.swift in Sources */,
 				AC2B00DF2A1B092700C135D3 /* Block.swift in Sources */,
 				AC416A6F2A1B974100240610 /* AppFont.swift in Sources */,
 				AC416A6D2A1B966D00240610 /* AppColor.swift in Sources */,
+				ACD2DC322A1C708700A1ADBF /* HomeView.swift in Sources */,
+				ACD2DC362A1C7BC400A1ADBF /* CustomButton.swift in Sources */,
 				AC4B16DD2A1609A0002667E3 /* GameView.swift in Sources */,
+				ACD2DC3F2A1CCDBA00A1ADBF /* CoreDataManager.swift in Sources */,
 				AC4B16DB2A1609A0002667E3 /* tower_bloxxApp.swift in Sources */,
+				ACC25AC72A1D212200043E23 /* MusicController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +491,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ACD2DC3B2A1CCD3600A1ADBF /* TowerBlock.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ACD2DC3C2A1CCD3600A1ADBF /* TowerBlock.xcdatamodel */,
+			);
+			currentVersion = ACD2DC3C2A1CCD3600A1ADBF /* TowerBlock.xcdatamodel */;
+			path = TowerBlock.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC4B16CF2A1609A0002667E3 /* Project object */;
 }

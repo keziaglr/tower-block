@@ -20,17 +20,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var stickBody: SKPhysicsJointFixed!
     var cornerNode : SKShapeNode!
     var scoreLbl : SKLabelNode!
+    var score2Lbl : SKLabelNode!
     var descLbl : SKLabelNode!
     var block: Block!
     var index: Int = 1
     var combo: Int = 0
     var score: Int = 0
     var blockSize: Int = 125
-    var gameOver: Bool = false
+//    var gameOver: Bool = false
     var dropped: Bool = false
     var finGenerate: Bool = false
     var blocks: [Block] = []
     var cities: [SKSpriteNode] = []
+    
+    @ObservedObject var gameData : GameData
+        
+    init(size: CGSize, gameData: GameData) {
+        self.gameData = gameData
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -30)
@@ -44,11 +57,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     override func update(_ currentTime: TimeInterval) {
         if index > 2{
             if blocks[index-1].position.y < 0 {
-                gameOver = true
+                gameData.gameOver = true
                 descLbl.text = "Game Over"
             }
         }
         
+        gameData.score = score
         
     }
     
@@ -69,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 run(sequenceAction)
                 
             }else if (firstNode == blocks[index-1] && secondNode == ground) || (firstNode == ground && secondNode == blocks[index-1]) {
-                gameOver = true
+                gameData.gameOver = true
                 descLbl.text = "Game Over"
                 
             }else if (firstNode == blocks[index-2] && secondNode == blocks[index-1]) || firstNode == blocks[index-2] && secondNode == blocks[index-1] {
@@ -80,8 +94,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                             let joint = SKPhysicsJointFixed.joint(withBodyA: self.blocks[self.index-2].physicsBody!, bodyB: self.blocks[self.index-1].physicsBody!, anchor: contact.contactPoint)
                             self.physicsWorld.add(joint)
                             self.dropped = false
-                            let moveLeft = SKAction.moveBy(x: -12, y: 0, duration: 1.5)
-                            let moveRight = SKAction.moveBy(x: 12, y: 0, duration: 1.5)
+                            let moveLeft = SKAction.moveBy(x: -10, y: 0, duration: 1.5)
+                            let moveRight = SKAction.moveBy(x: 10, y: 0, duration: 1.5)
                             let rotateSequence = SKAction.sequence([moveLeft, moveRight])
                             let repeatAction = SKAction.repeatForever(rotateSequence)
                             self.blocks[self.index-2].removeAllActions()
@@ -96,13 +110,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     
     func showScore(){
+        
+        
         scoreLbl = SKLabelNode(fontNamed: AppFont.regular)
         scoreLbl.text = "\(score)"
         scoreLbl.fontColor = UIColor(red: 12.0/255.0, green: 46.0/255.0, blue: 69.0/255.0, alpha: 1.0)
-        scoreLbl.position = CGPoint(x: size.width/10, y: size.height/2)
+        scoreLbl.position = CGPoint(x: size.width*1.5/10, y: size.height*8.4/10)
         scoreLbl.fontSize = 50
         scoreLbl.zPosition = 1
         self.addChild(scoreLbl)
+        
+        score2Lbl = SKLabelNode(fontNamed: AppFont.regular)
+        score2Lbl.text = "Score"
+        score2Lbl.fontColor = UIColor(red: 12.0/255.0, green: 46.0/255.0, blue: 69.0/255.0, alpha: 1.0)
+        score2Lbl.position = CGPoint(x: size.width*1.5/10, y: size.height*9/10)
+        score2Lbl.fontSize = 25
+        score2Lbl.zPosition = 1
+        self.addChild(score2Lbl)
         
         descLbl = SKLabelNode(fontNamed: AppFont.regular)
         descLbl.fontColor = UIColor(red: 73.0/255.0, green: 75.0/255.0, blue: 90.0/255.0, alpha: 0.5)
@@ -252,7 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.physicsWorld.remove(stickBody)
             let delayAction = SKAction.wait(forDuration: 2.5)
             self.run(delayAction) { [self] in
-                if blocks[index-1].position.y >= size.height/5 && !gameOver{
+                if blocks[index-1].position.y >= size.height/5 && !gameData.gameOver{
                     let moveAction = SKAction.moveBy(x: 0, y: -110, duration: 2.0)
                     self.ground.run(moveAction)
                     self.cities[0].run(moveAction)
@@ -313,7 +337,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     }
                     
                     scoreLbl.text = "\(score)"
-                    if !gameOver && !finGenerate{
+                    if !gameData.gameOver && !finGenerate{
                         self.generateBlock(base: false)
                     }
                 }
@@ -322,18 +346,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
 }
 
+class GameData: ObservableObject {
+    @Published var score: Int = 0
+    @Published var gameOver: Bool = false
+}
+
 struct GameView: View {
+    @State var mc : MusicController
+    @StateObject var gameData = GameData()
     var body: some View {
-        ZStack{
-            GeometryReader { geometry in
-                SpriteView(scene: GameScene(size: CGSize(width: geometry.size.width, height: geometry.size.height)), options: [.allowsTransparency])
-            }
-        }.ignoresSafeArea()
+        NavigationView {
+            ZStack{
+                GeometryReader { geometry in
+                    SpriteView(scene: GameScene(size: CGSize(width: geometry.size.width, height: geometry.size.height), gameData: gameData), options: [.allowsTransparency])
+                }
+                
+                if gameData.gameOver{
+                    Popup(mc: mc, score: gameData.score)
+                }
+            }.ignoresSafeArea()
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(mc: MusicController())
     }
 }
