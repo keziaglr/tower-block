@@ -27,7 +27,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var combo: Int = 0
     var score: Int = 0
     var blockSize: Int = 125
-//    var gameOver: Bool = false
     var dropped: Bool = false
     var finGenerate: Bool = false
     var blocks: [Block] = []
@@ -55,10 +54,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         generateBlock(base: true)
     }
     override func update(_ currentTime: TimeInterval) {
-        if index > 2{
+        if gameData.replay{
+            let newScene = GameScene(size: self.size, gameData: gameData)
+            newScene.scaleMode = self.scaleMode
+            let animation = SKTransition.fade(withDuration: 1.0)
+            self.view?.presentScene(newScene, transition: animation)
+            gameData.replay = false
+        }
+        
+        if index > 2 && !gameData.gameOver && descLbl.text != "Game Over"{
             if blocks[index-1].position.y < 0 {
-                gameData.gameOver = true
                 descLbl.text = "Game Over"
+                gameData.gameOver = true
             }
         }
         
@@ -316,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                         self.combo = 0
                     }
                     
-                    if index % 5 == 0 {
+                    if index % 10 == 0 {
                         descLbl.text = "Level Up!"
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             self.descLbl.text = ""
@@ -327,7 +334,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                             y: rope.position.y - 200
                         )
                         let duration = 2.0 - (Double(index) / 20) > 1.0 ? 2.0 - (Double(index) / 20) : 1.0
-                        blockSize = blockSize - index/5 * 5 > 70 ? blockSize - index/5 * 5 : 70
+                        blockSize = blockSize - index/10 * 5 > 70 ? blockSize - index/10 * 5 : 70
                         rope.removeAllActions()
                         let newRotateLeftAction = SKAction.rotate(byAngle: CGFloat.pi/2.5, duration: duration)
                         let newRotateRightAction = SKAction.rotate(byAngle: -CGFloat.pi/2.5, duration: duration)
@@ -349,23 +356,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 class GameData: ObservableObject {
     @Published var score: Int = 0
     @Published var gameOver: Bool = false
+    @Published var replay: Bool = false
 }
 
 struct GameView: View {
     @State var mc : MusicController
     @StateObject var gameData = GameData()
     var body: some View {
-        NavigationView {
             ZStack{
                 GeometryReader { geometry in
                     SpriteView(scene: GameScene(size: CGSize(width: geometry.size.width, height: geometry.size.height), gameData: gameData), options: [.allowsTransparency])
                 }
                 
                 if gameData.gameOver{
-                    Popup(mc: mc, score: gameData.score)
+                    Popup(mc: mc, score: gameData.score, gameData: gameData)
                 }
             }.ignoresSafeArea()
-        }.navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

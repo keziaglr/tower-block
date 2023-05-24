@@ -11,12 +11,12 @@ struct PopupGameOver: View {
     @State var mc: MusicController
     @State var score = 0
     @Binding var nextPage : Bool
+    @ObservedObject var gameData: GameData
     var body: some View {
         ZStack{
             Rectangle()
                 .fill(Color.black.opacity(0.5))
                 .edgesIgnoringSafeArea(.all)
-            
             VStack{
                 Text("Game Over")
                     .textCase(.uppercase)
@@ -32,8 +32,9 @@ struct PopupGameOver: View {
                 }.padding(.vertical, 30)
                 
                 HStack(spacing: 70){
-                    NavigationLink {
-                        GameView(mc:mc)
+                    Button {
+                        gameData.gameOver = false
+                        gameData.replay = true
                     } label: {
                         CustomButton2(text: "REPLAY")
                     }
@@ -64,10 +65,11 @@ struct Popup: View{
     @State var mc: MusicController
     @State var score = 0
     @State var nextPage = false
+    @ObservedObject var gameData : GameData
     var body: some View {
         ZStack{
             if !nextPage{
-                PopupGameOver(mc:mc, score: score, nextPage: $nextPage)
+                PopupGameOver(mc:mc, score: score, nextPage: $nextPage, gameData: gameData)
             }else{
                 PopupSubmit(score: score,mc: mc)
             }
@@ -76,6 +78,7 @@ struct Popup: View{
 }
 
 struct PopupSubmit: View {
+    @Environment(\.presentationMode) var presentationMode
     @State var text: String = ""
     @State var score = 0
     @State var mc: MusicController
@@ -108,18 +111,16 @@ struct PopupSubmit: View {
                             .stroke(AppColor.navy, lineWidth: 3)
                     )
                     .padding(.bottom, 30)
-                NavigationLink {
-                    HomeView(mc: mc)
+                Button {
+                    if text != ""{
+                        cdm.addData(name: text, score: score)
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 } label: {
                     CustomButton(text: "SUBMIT")
                 }
                 .disabled(text == "")
                 .opacity(text == "" ? 0.5 : 1.0)
-                .simultaneousGesture(TapGesture().onEnded {
-                    if text != ""{
-                        cdm.addData(name: text, score: score)
-                    }
-                })
             }
             .padding(20)
             .frame(width: 350, height: 350)
@@ -136,7 +137,6 @@ struct LeaderboardPopup: View {
     @State var cdm = CoreDataManager()
     var body: some View {
         ZStack{
-            
             VStack {
                 Text("SCOREBOARD")
                     .textCase(.uppercase)

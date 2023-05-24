@@ -9,6 +9,13 @@ import SwiftUI
 import AVFoundation
 
 struct HomeView: View {
+    @State private var showLayer1 = false
+    @State private var showLayer2 = false
+    @State private var showLayer3 = false
+    @State private var moveCloud1 = false
+    @State private var moveCloud2 = false
+    @State private var moveCloud3 = false
+    @State private var showLogo = false
     @State var cdm = CoreDataManager()
     @State var mc = MusicController()
     @State var home : Bool = true
@@ -17,33 +24,91 @@ struct HomeView: View {
         NavigationView {
             ZStack{
                 ZStack{
-                    Image("city3")
-                        .resizable()
-                    Image("city2")
-                        .resizable()
-                    Image("city1")
-                        .resizable()
+                    if showLayer3{
+                        Image("city3")
+                            .resizable()
+                            .transition(.move(edge: .bottom))
+                            .opacity(showLayer3 ? 1.0 : 0.0)
+                    }
+                    if showLayer2{
+                        Image("city2")
+                            .resizable()
+                            .transition(.move(edge: .bottom))
+                            .opacity(showLayer2 ? 1.0 : 0.0)
+                    }
+                    if showLayer1{
+                        Image("city1")
+                            .resizable()
+                            .transition(.move(edge: .bottom))
+                            .opacity(showLayer1 ? 1.0 : 0.0)
+                    }
                     Image("cloud")
                         .resizable()
                         .scaledToFit()
                     .frame(width: 275, height: 275)
-                    .offset(x: -100)
                     .opacity(0.8)
-                    .offset(x:-75, y:-275)
+                    .offset(x:moveCloud1 ? 175 : -175, y:-275)
+                    .onAppear {
+                        withAnimation(
+                            .linear(duration: 1)
+                            .speed(0.05)
+                            .repeatForever(autoreverses: true)) {
+                                moveCloud1.toggle()
+                            }
+                    }
                     Image("cloud")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250, height: 250)
                         .opacity(0.7)
-                        .offset(x:100, y:-150)
+                        .offset(x:moveCloud2 ? -200 : 200, y:-150)
+                        .onAppear {
+                            withAnimation(
+                                .linear(duration: 1)
+                                .speed(0.05)
+                                .repeatForever(autoreverses: true)) {
+                                    moveCloud2.toggle()
+                                }
+                        }
                     Image("cloud")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .opacity(0.6)
-                        .offset(x:-75, y: -30)
-                }.background{
+                        .offset(x:moveCloud3 ? 100 : -100, y: -30)
+                        .onAppear {
+                            withAnimation(
+                                .linear(duration: 1)
+                                .speed(0.05)
+                                .repeatForever(autoreverses: true)) {
+                                    moveCloud3.toggle()
+                                }
+                        }
+                }
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .background{
                     AppColor.sky
+                }
+                .onAppear {
+                    for i in stride(from: 0, to: 3, by: 0.25) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + i) {
+                            withAnimation(Animation.easeInOut(duration: 2.0)) {
+                                switch i {
+                                case 0.25:
+                                    showLayer1 = true
+                                case 0.5:
+                                    showLayer2 = true
+                                case 0.75:
+                                    showLayer3 = true
+                                case 1.75:
+                                    showLogo = true
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 if home {
                     VStack{
@@ -66,7 +131,8 @@ struct HomeView: View {
                         }, label: {
                             CustomButton(text: "SCOREBOARD")
                         })
-                    }
+                    }.offset(y:showLogo ? 0 : 100)
+                    .opacity(showLogo ? 1.0 : 0.001)
                 }else{
                     VStack {
                         LeaderboardPopup()
