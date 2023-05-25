@@ -63,11 +63,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         
         if index > 2 && !gameData.gameOver && descLbl.text != "Game Over"{
+            if blocks[index-2].position.x < 0 || blocks[index-2].position.x > size.width{
+                print("hi")
+                blocks[index-2].physicsBody?.velocity = CGVector(dx: -blocks[index-2].physicsBody!.velocity.dx * 2, dy: blocks[index-2].physicsBody!.velocity.dy)
+            }
             if blocks[index-1].position.y < 0 {
                 descLbl.text = "Game Over"
                 gameData.gameOver = true
             }
         }
+        
         
         gameData.score = score
         
@@ -101,12 +106,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                             let joint = SKPhysicsJointFixed.joint(withBodyA: self.blocks[self.index-2].physicsBody!, bodyB: self.blocks[self.index-1].physicsBody!, anchor: contact.contactPoint)
                             self.physicsWorld.add(joint)
                             self.dropped = false
-                            let moveLeft = SKAction.moveBy(x: -10, y: 0, duration: 1.5)
-                            let moveRight = SKAction.moveBy(x: 10, y: 0, duration: 1.5)
-                            let rotateSequence = SKAction.sequence([moveLeft, moveRight])
-                            let repeatAction = SKAction.repeatForever(rotateSequence)
-                            self.blocks[self.index-2].removeAllActions()
-                            self.blocks[self.index-1].run(repeatAction)
                         }
                         
                     }
@@ -284,7 +283,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             let delayAction = SKAction.wait(forDuration: 2.5)
             self.run(delayAction) { [self] in
                 if blocks[index-1].position.y >= size.height/5 && !gameData.gameOver{
-                    let moveAction = SKAction.moveBy(x: 0, y: -110, duration: 2.0)
+                    let moveAction = SKAction.moveBy(x: 0, y: -125, duration: 2.0)
                     self.ground.run(moveAction)
                     self.cities[0].run(moveAction)
                     self.cities[1].run(moveAction)
@@ -323,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                         self.combo = 0
                     }
                     
-                    if index % 10 == 0 {
+                    if index % 5 == 0 {
                         descLbl.text = "Level Up!"
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                             self.descLbl.text = ""
@@ -334,7 +333,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                             y: rope.position.y - 200
                         )
                         let duration = 2.0 - (Double(index) / 20) > 1.0 ? 2.0 - (Double(index) / 20) : 1.0
-                        blockSize = blockSize - index/10 * 5 > 70 ? blockSize - index/10 * 5 : 70
+                        blockSize = blockSize - index/5 * 5 > 70 ? blockSize - index/5 * 5 : 70
                         rope.removeAllActions()
                         let newRotateLeftAction = SKAction.rotate(byAngle: CGFloat.pi/2.5, duration: duration)
                         let newRotateRightAction = SKAction.rotate(byAngle: -CGFloat.pi/2.5, duration: duration)

@@ -30,6 +30,7 @@ class Block: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
         self.physicsBody?.mass = 0.2
+        self.physicsBody?.restitution = 0.2
         self.physicsBody?.categoryBitMask = PhysicsCategory.block
         self.physicsBody?.collisionBitMask = PhysicsCategory.block | PhysicsCategory.ground
         self.physicsBody?.contactTestBitMask = PhysicsCategory.ground | PhysicsCategory.block
